@@ -14,8 +14,24 @@ import org.jetbrains.annotations.NotNull;
 
 public final class Arcaniteperksfix extends JavaPlugin implements Listener {
 
+    private static final String ANSI_MAGENTA = "\u001B[35m";
+    private static final String ANSI_LIGHT_GRAY = "\u001B[37m";
+    private static final String ANSI_RESET = "\u001B[0m";
+    private static final String ANSI_LIGHT_GREEN = "\u001B[92m";
+    private static final String ANSI_RED = "\u001B[31m";
+
     @Override
     public void onEnable() {
+        // Affiche un message de démarrage dans la console
+        Bukkit.getLogger().info(ANSI_LIGHT_GRAY + "︹︹︹︹︹︹︹︹︹︹");
+        Bukkit.getLogger().info(ANSI_MAGENTA + "  _____________  __._____.___. ____  ___  _______  ________________________      __________ __________ ____  __." + ANSI_RESET);
+        Bukkit.getLogger().info(ANSI_MAGENTA + " /   _____/    |/ _|\\__  |   | \\   \\/  /  \\      \\ \\_   _____/\\__    ___/  \\    /  \\_____  \\\\______   \\    |/ _|" + ANSI_RESET);
+        Bukkit.getLogger().info(ANSI_MAGENTA + " \\_____  \\|      <   /   |   |  \\     /   /   |   \\ |    __)_   |    |  \\   \\/\\/   //   |   \\|       _/      <  " + ANSI_RESET);
+        Bukkit.getLogger().info(ANSI_MAGENTA + " /        \\    |  \\  \\____   |  /     \\  /    |    \\|        \\  |    |   \\        //    |    \\    |   \\    |  \\ " + ANSI_RESET);
+        Bukkit.getLogger().info(ANSI_MAGENTA + "/_______  /____|__ \\ / ______| /___/\\  \\ \\____|__  /_______  /  |____|    \\__/\\  / \\_______  /____|_  /____|__ \\" + ANSI_RESET);
+        Bukkit.getLogger().info(ANSI_MAGENTA + "        \\/        \\/ \\/              \\_/         \\/        \\/                  \\/          \\/       \\/        \\/" + ANSI_RESET);
+        Bukkit.getLogger().info(ANSI_LIGHT_GREEN + "  Plugin ArcanitePerksFix enabled !");
+        Bukkit.getLogger().info(ANSI_LIGHT_GRAY + "︺︺︺︺︺︺︺︺︺︺");
         // Enregistrement de l'écouteur d'événements
         Bukkit.getPluginManager().registerEvents(this, this);
 
@@ -30,9 +46,17 @@ public final class Arcaniteperksfix extends JavaPlugin implements Listener {
 
     @Override
     public void onDisable() {
-        // Code d'arrêt du plugin si nécessaire
+        Bukkit.getLogger().info(ANSI_LIGHT_GRAY + "︹︹︹︹︹︹︹︹︹︹");
+        Bukkit.getLogger().info(ANSI_MAGENTA + "  _____________  __._____.___. ____  ___  _______  ________________________      __________ __________ ____  __." + ANSI_RESET);
+        Bukkit.getLogger().info(ANSI_MAGENTA + " /   _____/    |/ _|\\__  |   | \\   \\/  /  \\      \\ \\_   _____/\\__    ___/  \\    /  \\_____  \\\\______   \\    |/ _|" + ANSI_RESET);
+        Bukkit.getLogger().info(ANSI_MAGENTA + " \\_____  \\|      <   /   |   |  \\     /   /   |   \\ |    __)_   |    |  \\   \\/\\/   //   |   \\|       _/      <  " + ANSI_RESET);
+        Bukkit.getLogger().info(ANSI_MAGENTA + " /        \\    |  \\  \\____   |  /     \\  /    |    \\|        \\  |    |   \\        //    |    \\    |   \\    |  \\ " + ANSI_RESET);
+        Bukkit.getLogger().info(ANSI_MAGENTA + "/_______  /____|__ \\ / ______| /___/\\  \\ \\____|__  /_______  /  |____|    \\__/\\  / \\_______  /____|_  /____|__ \\" + ANSI_RESET);
+        Bukkit.getLogger().info(ANSI_MAGENTA + "        \\/        \\/ \\/              \\_/         \\/        \\/                  \\/          \\/       \\/        \\/" + ANSI_RESET);
+        Bukkit.getLogger().info(ANSI_RED + "  Plugin ArcanitePerksFix disabled !");
+        Bukkit.getLogger().info(ANSI_LIGHT_GRAY + "︺︺︺︺︺︺︺︺︺︺");
     }
-    
+
     private boolean isCustomLeatherChestplate(ItemStack item) {
         return item.getType() == Material.LEATHER_CHESTPLATE &&
                 item.getItemMeta() != null &&
@@ -46,8 +70,8 @@ public final class Arcaniteperksfix extends JavaPlugin implements Listener {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 ItemStack chestplate = player.getInventory().getChestplate();
                 if (chestplate != null && isCustomLeatherChestplate(chestplate)) {
-                    // Applique l'effet de résistance au feu pendant 0,1 seconde (2 ticks)
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 60, 0, true, false, false));
+                    // Applique l'effet de résistance au feu pendant 1 seconde (20 ticks)
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 20, 0, true, false, false));
                 }
             }
         }
