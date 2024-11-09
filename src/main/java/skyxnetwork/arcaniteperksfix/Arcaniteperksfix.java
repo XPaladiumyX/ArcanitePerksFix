@@ -14,7 +14,7 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 
-public final class Arcaniteperksfix extends JavaPlugin implements @NotNull Listener {
+public final class Arcaniteperksfix extends JavaPlugin implements Listener {
 
     @Override
     public void onEnable() {
@@ -39,7 +39,7 @@ public final class Arcaniteperksfix extends JavaPlugin implements @NotNull Liste
     public void onArmorChange(PlayerArmorChangeEvent event) {
         // Événement appelé quand le joueur change d'armure
         ItemStack newChestplate = event.getNewItem();
-        if (newChestplate != null && isCustomLeatherChestplate(newChestplate)) {
+        if (isCustomLeatherChestplate(newChestplate)) {
             event.getPlayer().sendMessage("§aEffet de résistance au feu appliqué !");
         } else {
             event.getPlayer().sendMessage("§cEffet de résistance au feu retiré.");
