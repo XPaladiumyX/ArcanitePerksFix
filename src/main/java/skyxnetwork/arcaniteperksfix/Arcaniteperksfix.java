@@ -12,10 +12,6 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
-
 public final class Arcaniteperksfix extends JavaPlugin implements Listener {
 
     private static final String ANSI_MAGENTA = "\u001B[35m";
@@ -23,8 +19,6 @@ public final class Arcaniteperksfix extends JavaPlugin implements Listener {
     private static final String ANSI_RESET = "\u001B[0m";
     private static final String ANSI_LIGHT_GREEN = "\u001B[92m";
     private static final String ANSI_RED = "\u001B[31m";
-
-    private final Set<UUID> playersWithArmor = new HashSet<>();
 
     @Override
     public void onEnable() {
@@ -79,23 +73,11 @@ public final class Arcaniteperksfix extends JavaPlugin implements Listener {
         public void run() {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 ItemStack chestplate = player.getInventory().getChestplate();
-                UUID playerId = player.getUniqueId();
-
-                assert chestplate != null;
-                if (isCustomLeatherChestplate(chestplate)) {
-                    // Si le joueur porte le plastron et n'a pas encore l'effet
-                    if (!playersWithArmor.contains(playerId)) {
-                        playersWithArmor.add(playerId);
-                        player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 20, 0, true, false, false));
-                        player.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, Integer.MAX_VALUE, 1, true, false, false));
-                    }
-                } else {
-                    // Si le joueur a retiré le plastron, on enlève l'effet
-                    if (playersWithArmor.contains(playerId)) {
-                        playersWithArmor.remove(playerId);
-                        player.removePotionEffect(PotionEffectType.HEALTH_BOOST);
-                        player.removePotionEffect(PotionEffectType.FIRE_RESISTANCE);
-                    }
+                if (chestplate != null && isCustomLeatherChestplate(chestplate)) {
+                    // Applique l'effet de résistance au feu pendant 1 seconde (20 ticks)
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 20, 0, true, false, false));
+                    // Applique l'effet de boost de santé pour donner 2 cœurs supplémentaires (40 ticks)
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 40, 1, true, false, false));
                 }
             }
         }
