@@ -5,6 +5,7 @@ This Minecraft plugin allows you to set on any custom model data of an armor a p
 Features:
 - Can set any given effects on equip of a custom armor
 - Can set a message and equip/unequip
+  
 I let this plugin as OpenSource in case if someone need the patern
 This plugin is not going to be maintained for other server owners/devlopper
 We made this plugin for the Minecraft Server Sky X Network to fight against ItemsAdder plugin perks
