@@ -23,15 +23,16 @@ public final class Arcaniteperksfix extends JavaPlugin implements Listener {
     @Override
     public void onEnable() {
         // Affiche un message de démarrage dans la console
-        Bukkit.getLogger().info(ANSI_LIGHT_GRAY + "︹︹︹︹︹︹︹︹︹︹");
-        Bukkit.getLogger().info(ANSI_MAGENTA + "  _____________  __._____.___. ____  ___  _______  ________________________      __________ __________ ____  __." + ANSI_RESET);
-        Bukkit.getLogger().info(ANSI_MAGENTA + " /   _____/    |/ _|\\__  |   | \\   \\/  /  \\      \\ \\_   _____/\\__    ___/  \\    /  \\_____  \\\\______   \\    |/ _|" + ANSI_RESET);
-        Bukkit.getLogger().info(ANSI_MAGENTA + " \\_____  \\|      <   /   |   |  \\     /   /   |   \\ |    __)_   |    |  \\   \\/\\/   //   |   \\|       _/      <  " + ANSI_RESET);
-        Bukkit.getLogger().info(ANSI_MAGENTA + " /        \\    |  \\  \\____   |  /     \\  /    |    \\|        \\  |    |   \\        //    |    \\    |   \\    |  \\ " + ANSI_RESET);
-        Bukkit.getLogger().info(ANSI_MAGENTA + "/_______  /____|__ \\ / ______| /___/\\  \\ \\____|__  /_______  /  |____|    \\__/\\  / \\_______  /____|_  /____|__ \\" + ANSI_RESET);
-        Bukkit.getLogger().info(ANSI_MAGENTA + "        \\/        \\/ \\/              \\_/         \\/        \\/                  \\/          \\/       \\/        \\/" + ANSI_RESET);
-        Bukkit.getLogger().info(ANSI_LIGHT_GREEN + "  Plugin ArcanitePerksFix enabled !");
-        Bukkit.getLogger().info(ANSI_LIGHT_GRAY + "︺︺︺︺︺︺︺︺︺︺");
+        Bukkit.getLogger().info(ANSI_LIGHT_GRAY + "︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹");
+        Bukkit.getLogger().info(ANSI_MAGENTA + " _______  ___   _  __   __    __   __    __    _  _______  _______ " + ANSI_RESET);
+        Bukkit.getLogger().info(ANSI_MAGENTA + "|       ||   | | ||  | |  |  |  |_|  |  |  |  | ||       ||       |" + ANSI_RESET);
+        Bukkit.getLogger().info(ANSI_MAGENTA + "|  _____||   |_| ||  |_|  |  |       |  |   |_| ||    ___||_     _|" + ANSI_RESET);
+        Bukkit.getLogger().info(ANSI_MAGENTA + "| |_____ |      _||       |  |       |  |       ||   |___   |   |  " + ANSI_RESET);
+        Bukkit.getLogger().info(ANSI_MAGENTA + "|_____  ||     |_ |_     _|   |     |   |  _    ||    ___|  |   |  " + ANSI_RESET);
+        Bukkit.getLogger().info(ANSI_MAGENTA + " _____| ||    _  |  |   |    |   _   |  | | |   ||   |___   |   |  " + ANSI_RESET);
+        Bukkit.getLogger().info(ANSI_MAGENTA + "|_______||___| |_|  |___|    |__| |__|  |_|  |__||_______|  |___|  " + ANSI_RESET);
+        Bukkit.getLogger().info(ANSI_LIGHT_GREEN + "Plugin ArcanitePerksFix enabled !");
+        Bukkit.getLogger().info(ANSI_LIGHT_GRAY + "︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺");
         // Enregistrement de l'écouteur d'événements
         Bukkit.getPluginManager().registerEvents(this, this);
 
@@ -46,15 +47,16 @@ public final class Arcaniteperksfix extends JavaPlugin implements Listener {
 
     @Override
     public void onDisable() {
-        Bukkit.getLogger().info(ANSI_LIGHT_GRAY + "︹︹︹︹︹︹︹︹︹︹");
-        Bukkit.getLogger().info(ANSI_MAGENTA + "  _____________  __._____.___. ____  ___  _______  ________________________      __________ __________ ____  __." + ANSI_RESET);
-        Bukkit.getLogger().info(ANSI_MAGENTA + " /   _____/    |/ _|\\__  |   | \\   \\/  /  \\      \\ \\_   _____/\\__    ___/  \\    /  \\_____  \\\\______   \\    |/ _|" + ANSI_RESET);
-        Bukkit.getLogger().info(ANSI_MAGENTA + " \\_____  \\|      <   /   |   |  \\     /   /   |   \\ |    __)_   |    |  \\   \\/\\/   //   |   \\|       _/      <  " + ANSI_RESET);
-        Bukkit.getLogger().info(ANSI_MAGENTA + " /        \\    |  \\  \\____   |  /     \\  /    |    \\|        \\  |    |   \\        //    |    \\    |   \\    |  \\ " + ANSI_RESET);
-        Bukkit.getLogger().info(ANSI_MAGENTA + "/_______  /____|__ \\ / ______| /___/\\  \\ \\____|__  /_______  /  |____|    \\__/\\  / \\_______  /____|_  /____|__ \\" + ANSI_RESET);
-        Bukkit.getLogger().info(ANSI_MAGENTA + "        \\/        \\/ \\/              \\_/         \\/        \\/                  \\/          \\/       \\/        \\/" + ANSI_RESET);
+        Bukkit.getLogger().info(ANSI_LIGHT_GRAY + "︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹︹");
+        Bukkit.getLogger().info(ANSI_MAGENTA + " _______  ___   _  __   __    __   __    __    _  _______  _______ " + ANSI_RESET);
+        Bukkit.getLogger().info(ANSI_MAGENTA + "|       ||   | | ||  | |  |  |  |_|  |  |  |  | ||       ||       |" + ANSI_RESET);
+        Bukkit.getLogger().info(ANSI_MAGENTA + "|  _____||   |_| ||  |_|  |  |       |  |   |_| ||    ___||_     _|" + ANSI_RESET);
+        Bukkit.getLogger().info(ANSI_MAGENTA + "| |_____ |      _||       |  |       |  |       ||   |___   |   |  " + ANSI_RESET);
+        Bukkit.getLogger().info(ANSI_MAGENTA + "|_____  ||     |_ |_     _|   |     |   |  _    ||    ___|  |   |  " + ANSI_RESET);
+        Bukkit.getLogger().info(ANSI_MAGENTA + " _____| ||    _  |  |   |    |   _   |  | | |   ||   |___   |   |  " + ANSI_RESET);
+        Bukkit.getLogger().info(ANSI_MAGENTA + "|_______||___| |_|  |___|    |__| |__|  |_|  |__||_______|  |___|  " + ANSI_RESET);
         Bukkit.getLogger().info(ANSI_RED + "  Plugin ArcanitePerksFix disabled !");
-        Bukkit.getLogger().info(ANSI_LIGHT_GRAY + "︺︺︺︺︺︺︺︺︺︺");
+        Bukkit.getLogger().info(ANSI_LIGHT_GRAY + "︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺︺");
     }
 
     private boolean isCustomLeatherChestplate(ItemStack item) {
