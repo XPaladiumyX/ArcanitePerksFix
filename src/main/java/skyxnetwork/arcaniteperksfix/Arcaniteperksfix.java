@@ -135,7 +135,7 @@ public final class Arcaniteperksfix extends JavaPlugin implements Listener {
 
                 // Applique la vision nocturne si le casque est équipé
                 if (helmet != null && isCustomLeatherHelmet(helmet)) {
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 100, 0, true, false, false));
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 220, 0, true, false, false));
                 } else {
                     player.removePotionEffect(PotionEffectType.NIGHT_VISION);
                 }
