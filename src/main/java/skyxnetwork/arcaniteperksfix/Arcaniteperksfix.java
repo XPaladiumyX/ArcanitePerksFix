@@ -112,33 +112,32 @@ public final class Arcaniteperksfix extends JavaPlugin implements Listener {
                     // Applique l'effet de résistance au feu pendant 1 seconde (20 ticks)
                     player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 20, 0, true, false, false));
                 } else {
-                    player.removePotionEffect(PotionEffectType.FIRE_RESISTANCE);
                     // Retire l'effet de boost de santé si le joueur a enlevé le plastron
                     if (playersWithHealthBoost.contains(player)) {
                         player.removePotionEffect(PotionEffectType.HEALTH_BOOST);
                         playersWithHealthBoost.remove(player);
                     }
+                }
 
-                    // Applique l'invisibilité si les jambières sont équipées
-                    if (leggings != null && isCustomLeatherLeggings(leggings)) {
-                        player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 40, 0, true, false, false));
-                    } else {
-                        player.removePotionEffect(PotionEffectType.INVISIBILITY);
-                    }
+                // Applique l'invisibilité si les jambières sont équipées
+                if (leggings != null && isCustomLeatherLeggings(leggings)) {
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 40, 0, true, false, false));
+                } else {
+                    player.removePotionEffect(PotionEffectType.INVISIBILITY);
+                }
 
-                    // Applique la vitesse si les bottes sont équipées
-                    if (boots != null && isCustomLeatherBoots(boots)) {
-                        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 40, 0, true, false, false));
-                    } else {
-                        player.removePotionEffect(PotionEffectType.SPEED);
-                    }
+                // Applique la vitesse si les bottes sont équipées
+                if (boots != null && isCustomLeatherBoots(boots)) {
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 40, 0, true, false, false));
+                } else {
+                    player.removePotionEffect(PotionEffectType.SPEED);
+                }
 
-                    // Applique la vision nocturne si le casque est équipé
-                    if (helmet != null && isCustomLeatherHelmet(helmet)) {
-                        player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 40, 0, true, false, false));
-                    } else {
-                        player.removePotionEffect(PotionEffectType.NIGHT_VISION);
-                    }
+                // Applique la vision nocturne si le casque est équipé
+                if (helmet != null && isCustomLeatherHelmet(helmet)) {
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 40, 0, true, false, false));
+                } else {
+                    player.removePotionEffect(PotionEffectType.NIGHT_VISION);
                 }
             }
         }
