@@ -12,6 +12,9 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public final class Arcaniteperksfix extends JavaPlugin implements Listener {
 
     private static final String ANSI_MAGENTA = "\u001B[35m";
@@ -19,6 +22,8 @@ public final class Arcaniteperksfix extends JavaPlugin implements Listener {
     private static final String ANSI_RESET = "\u001B[0m";
     private static final String ANSI_LIGHT_GREEN = "\u001B[92m";
     private static final String ANSI_RED = "\u001B[31m";
+
+    private final Set<Player> playersWithHealthBoost = new HashSet<>();
 
     @Override
     public void onEnable() {
@@ -74,10 +79,19 @@ public final class Arcaniteperksfix extends JavaPlugin implements Listener {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 ItemStack chestplate = player.getInventory().getChestplate();
                 if (chestplate != null && isCustomLeatherChestplate(chestplate)) {
+                    if (!playersWithHealthBoost.contains(player)) {
+                        // Applique l'effet de boost de santé pour donner 2 cœurs supplémentaires Infini
+                        player.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, Integer.MAX_VALUE, 1, true, false, false));
+                        playersWithHealthBoost.add(player);
+                    }
                     // Applique l'effet de résistance au feu pendant 1 seconde (20 ticks)
                     player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 20, 0, true, false, false));
-                    // Applique l'effet de boost de santé pour donner 2 cœurs supplémentaires (40 ticks)
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, 40, 1, true, false, false));
+                } else {
+                    // Retire l'effet de boost de santé si le joueur a enlevé le plastron
+                    if (playersWithHealthBoost.contains(player)) {
+                        player.removePotionEffect(PotionEffectType.HEALTH_BOOST);
+                        playersWithHealthBoost.remove(player);
+                    }
                 }
             }
         }
