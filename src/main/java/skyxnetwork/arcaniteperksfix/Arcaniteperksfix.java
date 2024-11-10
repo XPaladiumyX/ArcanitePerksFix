@@ -24,6 +24,9 @@ public final class Arcaniteperksfix extends JavaPlugin implements Listener {
     private static final String ANSI_RED = "\u001B[31m";
 
     private final Set<Player> playersWithHealthBoost = new HashSet<>();
+    private final Set<Player> playersWithInvisibility = new HashSet<>();
+    private final Set<Player> playersWithSpeed = new HashSet<>();
+    private final Set<Player> playersWithNightVision = new HashSet<>();
 
     @Override
     public void onEnable() {
@@ -121,23 +124,31 @@ public final class Arcaniteperksfix extends JavaPlugin implements Listener {
 
                     // Gestion des jambières (INVISIBILITY)
                     if (leggings != null && isCustomLeatherLeggings(leggings)) {
+                        playersWithInvisibility.add(player);
                         player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 20, 0, true, false, false));
-                    } else {
+                    } else if (playersWithInvisibility.contains(player)) {
                         player.removePotionEffect(PotionEffectType.INVISIBILITY);
+                        playersWithInvisibility.remove(player);
                     }
 
                     // Gestion des bottes (SPEED)
                     if (boots != null && isCustomLeatherBoots(boots)) {
+                        playersWithSpeed.add(player);
                         player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20, 0, true, false, false));
-                    } else {
+                    } else if (playersWithSpeed.contains(player)) {
                         player.removePotionEffect(PotionEffectType.SPEED);
+                        playersWithSpeed.remove(player);
                     }
 
                     // Gestion du casque (NIGHT_VISION)
                     if (helmet != null && isCustomLeatherHelmet(helmet)) {
-                        player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 40, 0, true, false, false));
-                    } else {
-                        player.removePotionEffect(PotionEffectType.NIGHT_VISION);
+                        if (isCustomLeatherHelmet(helmet)) {
+                            playersWithNightVision.add(player);
+                            player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 40, 0, true, false, false));
+                        } else if (playersWithNightVision.contains(player)) {
+                            player.removePotionEffect(PotionEffectType.NIGHT_VISION);
+                            playersWithNightVision.remove(player);
+                        }
                     }
                 }
             }
