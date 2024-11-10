@@ -73,11 +73,36 @@ public final class Arcaniteperksfix extends JavaPlugin implements Listener {
                 item.getItemMeta().getCustomModelData() == 10006;
     }
 
+    private boolean isCustomLeatherLeggings(ItemStack item) {
+        return item.getType() == Material.LEATHER_LEGGINGS &&
+                item.getItemMeta() != null &&
+                item.getItemMeta().hasCustomModelData() &&
+                item.getItemMeta().getCustomModelData() == 10006;
+    }
+
+    private boolean isCustomLeatherBoots(ItemStack item) {
+        return item.getType() == Material.LEATHER_BOOTS &&
+                item.getItemMeta() != null &&
+                item.getItemMeta().hasCustomModelData() &&
+                item.getItemMeta().getCustomModelData() == 10006;
+    }
+
+    private boolean isCustomLeatherHelmet(ItemStack item) {
+        return item.getType() == Material.LEATHER_HELMET &&
+                item.getItemMeta() != null &&
+                item.getItemMeta().hasCustomModelData() &&
+                item.getItemMeta().getCustomModelData() == 10005;
+    }
+
     private class ArmorCheckTask extends BukkitRunnable {
         @Override
         public void run() {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 ItemStack chestplate = player.getInventory().getChestplate();
+                ItemStack leggings = player.getInventory().getLeggings();
+                ItemStack boots = player.getInventory().getBoots();
+                ItemStack helmet = player.getInventory().getHelmet();
+
                 if (chestplate != null && isCustomLeatherChestplate(chestplate)) {
                     if (!playersWithHealthBoost.contains(player)) {
                         // Applique l'effet de boost de santé pour donner 2 cœurs supplémentaires Infini
@@ -87,10 +112,32 @@ public final class Arcaniteperksfix extends JavaPlugin implements Listener {
                     // Applique l'effet de résistance au feu pendant 1 seconde (20 ticks)
                     player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 20, 0, true, false, false));
                 } else {
+                    player.removePotionEffect(PotionEffectType.FIRE_RESISTANCE);
                     // Retire l'effet de boost de santé si le joueur a enlevé le plastron
                     if (playersWithHealthBoost.contains(player)) {
                         player.removePotionEffect(PotionEffectType.HEALTH_BOOST);
                         playersWithHealthBoost.remove(player);
+                    }
+
+                    // Gestion des jambières (INVISIBILITY)
+                    if (leggings != null && isCustomLeatherLeggings(leggings)) {
+                        player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 20, 0, true, false, false));
+                    } else {
+                        player.removePotionEffect(PotionEffectType.INVISIBILITY);
+                    }
+
+                    // Gestion des bottes (SPEED)
+                    if (boots != null && isCustomLeatherBoots(boots)) {
+                        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 20, 0, true, false, false));
+                    } else {
+                        player.removePotionEffect(PotionEffectType.SPEED);
+                    }
+
+                    // Gestion du casque (NIGHT_VISION)
+                    if (helmet != null && isCustomLeatherHelmet(helmet)) {
+                        player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 40, 0, true, false, false));
+                    } else {
+                        player.removePotionEffect(PotionEffectType.NIGHT_VISION);
                     }
                 }
             }
