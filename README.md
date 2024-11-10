@@ -14,4 +14,4 @@ We made this plugin for the Minecraft Server Sky X Network to fight against Item
 function who's not that good. By remaking this plugin we are able to do what we want with the perks
 
 # This plugin supports Minecraft Spigot 1.20-1.20.1
-# This plugin will not be edited/Updated for Developers/Server Owners
+**This plugin will not be edited/Updated for Developers/Server Owners**
