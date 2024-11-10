@@ -81,7 +81,7 @@ public final class Arcaniteperksfix extends JavaPlugin implements Listener {
                 if (chestplate != null && isCustomLeatherChestplate(chestplate)) {
                     if (!playersWithHealthBoost.contains(player)) {
                         // Applique l'effet de boost de santé pour donner 2 cœurs supplémentaires Infini
-                        player.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, Integer.MAX_VALUE, 1, true, false, false));
+                        player.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, Integer.MAX_VALUE, 0, true, false, false));
                         playersWithHealthBoost.add(player);
                     }
                     // Applique l'effet de résistance au feu pendant 1 seconde (20 ticks)
