@@ -87,6 +87,12 @@ public final class Arcaniteperksfix extends JavaPlugin implements Listener {
                 item.getItemMeta().getCustomModelData() == 10006;
     }
 
+    private boolean isCustomLeatherBootsSpeed2(ItemStack item) {
+        return item != null && item.getType() == Material.LEATHER_BOOTS &&
+                item.getItemMeta() != null && item.getItemMeta().hasCustomModelData() &&
+                item.getItemMeta().getCustomModelData() == 10001;
+    }
+
     private boolean isCustomLeatherHelmet(ItemStack item) {
         return item.getType() == Material.LEATHER_HELMET &&
                 item.getItemMeta() != null &&
@@ -129,6 +135,9 @@ public final class Arcaniteperksfix extends JavaPlugin implements Listener {
                 // Applique la vitesse si les bottes sont équipées
                 if (boots != null && isCustomLeatherBoots(boots)) {
                     player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 40, 0, true, false, false));
+                } else if (isCustomLeatherBootsSpeed2(boots)) {
+                    // Applique la vitesse II si les bottes 10001 sont équipées
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 40, 1, true, false, false));
                 } else {
                     player.removePotionEffect(PotionEffectType.SPEED);
                 }
