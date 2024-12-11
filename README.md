@@ -1,6 +1,9 @@
 # Arcanite Perks Fix
 Devloped by ✨ | Sky X Network | ✨ 
 -
+[![Discord](https://badgen.net/badge/icon/discord?icon=discord&label)](https://discord.gg/pTErYjTh5h)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-no-red.svg)](https://bitbucket.org/lbesson/ansi-colors)
+[![Website](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://skyxnetwork.net)  
 This Minecraft plugin allows you to set on any custom model data of an armor a perk
 Features:
 - Can set any given effects on equip of a custom armor
