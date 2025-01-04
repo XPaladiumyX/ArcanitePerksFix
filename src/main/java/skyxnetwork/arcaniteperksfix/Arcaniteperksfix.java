@@ -109,46 +109,54 @@ public final class Arcaniteperksfix extends JavaPlugin implements Listener {
                 ItemStack boots = player.getInventory().getBoots();
                 ItemStack helmet = player.getInventory().getHelmet();
 
+                // Gestion du plastron
                 if (chestplate != null && isCustomLeatherChestplate(chestplate)) {
                     if (!playersWithHealthBoost.contains(player)) {
-                        // Applique l'effet de boost de santé pour donner 2 cœurs supplémentaires Infini
                         player.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, Integer.MAX_VALUE, 0, true, false, false));
                         playersWithHealthBoost.add(player);
                     }
-                    // Applique l'effet de résistance au feu pendant 1 seconde (20 ticks)
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 20, 0, true, false, false));
-                } else {
-                    // Retire l'effet de boost de santé si le joueur a enlevé le plastron
-                    if (playersWithHealthBoost.contains(player)) {
-                        player.removePotionEffect(PotionEffectType.HEALTH_BOOST);
-                        playersWithHealthBoost.remove(player);
+                    player.addPotionEffect(new PotionEffect(PotionEffectType.FIRE_RESISTANCE, 200, 0, true, false, false));
+                } else if (playersWithHealthBoost.contains(player)) {
+                    player.removePotionEffect(PotionEffectType.HEALTH_BOOST);
+                    playersWithHealthBoost.remove(player);
+                }
+
+                // Gestion des jambières (Invisibilité)
+                if (leggings != null && isCustomLeatherLeggings(leggings)) {
+                    if (!hasActiveEffect(player, PotionEffectType.INVISIBILITY, 0)) {
+                        player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 200, 0, true, false, false));
                     }
                 }
 
-                // Applique l'invisibilité si les jambières sont équipées
-                if (leggings != null && isCustomLeatherLeggings(leggings)) {
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 40, 0, true, false, false));
-                } else {
-                    player.removePotionEffect(PotionEffectType.INVISIBILITY);
+                // Gestion des bottes (Vitesse)
+                if (boots != null) {
+                    if (isCustomLeatherBoots(boots) && !hasActiveEffect(player, PotionEffectType.SPEED, 0)) {
+                        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 200, 0, true, false, false));
+                    } else if (isCustomLeatherBootsSpeed2(boots) && !hasActiveEffect(player, PotionEffectType.SPEED, 1)) {
+                        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 200, 1, true, false, false));
+                    }
                 }
 
-                // Applique la vitesse si les bottes sont équipées
-                if (boots != null && isCustomLeatherBoots(boots)) {
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 40, 0, true, false, false));
-                } else if (isCustomLeatherBootsSpeed2(boots)) {
-                    // Applique la vitesse II si les bottes 10001 sont équipées
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 40, 1, true, false, false));
-                } else {
-                    player.removePotionEffect(PotionEffectType.SPEED);
-                }
-
-                // Applique la vision nocturne si le casque est équipé
+                // Gestion du casque (Vision nocturne)
                 if (helmet != null && isCustomLeatherHelmet(helmet)) {
-                    player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 220, 0, true, false, false));
-                } else {
-                    player.removePotionEffect(PotionEffectType.NIGHT_VISION);
+                    if (!hasActiveEffect(player, PotionEffectType.NIGHT_VISION, 0)) {
+                        player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 400, 0, true, false, false));
+                    }
                 }
             }
+        }
+
+        /**
+         * Vérifie si un joueur a un effet actif avec un niveau spécifique.
+         *
+         * @param player Joueur à vérifier.
+         * @param effect Effet à vérifier.
+         * @param level  Niveau de l'effet.
+         * @return True si l'effet est actif avec le niveau spécifié.
+         */
+        private boolean hasActiveEffect(Player player, PotionEffectType effect, int level) {
+            PotionEffect activeEffect = player.getPotionEffect(effect);
+            return activeEffect != null && activeEffect.getAmplifier() == level;
         }
     }
 }
