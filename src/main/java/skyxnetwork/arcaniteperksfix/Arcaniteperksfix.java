@@ -23,6 +23,14 @@ public final class Arcaniteperksfix extends JavaPlugin implements Listener {
     private static final String ANSI_LIGHT_GREEN = "\u001B[92m";
     private static final String ANSI_RED = "\u001B[31m";
 
+    private static final int SPEED_DURATION = 400; // 20 secondes (en ticks)
+    private static final int NIGHT_VISION_DURATION = 600; // 30 secondes (en ticks)
+    private static final int INVISIBILITY_DURATION = 400; // 20 secondes (en ticks)
+
+    private static final int SPEED_REFRESH_THRESHOLD = 200; // 10 secondes
+    private static final int NIGHT_VISION_REFRESH_THRESHOLD = 400; // 20 secondes
+    private static final int INVISIBILITY_REFRESH_THRESHOLD = 200; // 10 secondes
+
     private final Set<Player> playersWithHealthBoost = new HashSet<>();
 
     @Override
@@ -109,7 +117,7 @@ public final class Arcaniteperksfix extends JavaPlugin implements Listener {
                 ItemStack boots = player.getInventory().getBoots();
                 ItemStack helmet = player.getInventory().getHelmet();
 
-                // Gestion du plastron
+                // Gestion du plastron (Health Boost et Fire Resistance)
                 if (chestplate != null && isCustomLeatherChestplate(chestplate)) {
                     if (!playersWithHealthBoost.contains(player)) {
                         player.addPotionEffect(new PotionEffect(PotionEffectType.HEALTH_BOOST, Integer.MAX_VALUE, 0, true, false, false));
@@ -123,40 +131,34 @@ public final class Arcaniteperksfix extends JavaPlugin implements Listener {
 
                 // Gestion des jambières (Invisibilité)
                 if (leggings != null && isCustomLeatherLeggings(leggings)) {
-                    if (!hasActiveEffect(player, PotionEffectType.INVISIBILITY, 0)) {
-                        player.addPotionEffect(new PotionEffect(PotionEffectType.INVISIBILITY, 200, 0, true, false, false));
-                    }
+                    refreshEffect(player, PotionEffectType.INVISIBILITY, INVISIBILITY_DURATION, INVISIBILITY_REFRESH_THRESHOLD);
                 }
 
                 // Gestion des bottes (Vitesse)
                 if (boots != null) {
-                    if (isCustomLeatherBoots(boots) && !hasActiveEffect(player, PotionEffectType.SPEED, 0)) {
-                        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 200, 0, true, false, false));
-                    } else if (isCustomLeatherBootsSpeed2(boots) && !hasActiveEffect(player, PotionEffectType.SPEED, 1)) {
-                        player.addPotionEffect(new PotionEffect(PotionEffectType.SPEED, 200, 1, true, false, false));
+                    if (isCustomLeatherBoots(boots)) {
+                        refreshEffect(player, PotionEffectType.SPEED, SPEED_DURATION, SPEED_REFRESH_THRESHOLD);
+                    } else if (isCustomLeatherBootsSpeed2(boots)) {
+                        refreshEffect(player, PotionEffectType.SPEED, SPEED_DURATION, SPEED_REFRESH_THRESHOLD, 1);
                     }
                 }
 
                 // Gestion du casque (Vision nocturne)
                 if (helmet != null && isCustomLeatherHelmet(helmet)) {
-                    if (!hasActiveEffect(player, PotionEffectType.NIGHT_VISION, 0)) {
-                        player.addPotionEffect(new PotionEffect(PotionEffectType.NIGHT_VISION, 400, 0, true, false, false));
-                    }
+                    refreshEffect(player, PotionEffectType.NIGHT_VISION, NIGHT_VISION_DURATION, NIGHT_VISION_REFRESH_THRESHOLD);
                 }
             }
         }
 
-        /**
-         * Vérifie si un joueur a un effet actif avec un niveau spécifique.
-         *
-         * @param player Joueur à vérifier.
-         * @param effect Effet à vérifier.
-         * @param level  Niveau de l'effet.
-         * @return True si l'effet est actif avec le niveau spécifié.
-         */
-        private boolean hasActiveEffect(Player player, PotionEffectType effect, int level) {
+        private void refreshEffect(Player player, PotionEffectType effect, int duration, int refreshThreshold) {
+            refreshEffect(player, effect, duration, refreshThreshold, 0);
+        }
+
+        private void refreshEffect(Player player, PotionEffectType effect, int duration, int refreshThreshold, int level) {
             PotionEffect activeEffect = player.getPotionEffect(effect);
-            return activeEffect != null && activeEffect.getAmplifier() == level;
+            if (activeEffect == null || activeEffect.getDuration() <= refreshThreshold) {
+                player.addPotionEffect(new PotionEffect(effect, duration, level, true, false, false));
+            }
         }
     }
 }
